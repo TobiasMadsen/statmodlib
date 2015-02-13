@@ -48,13 +48,12 @@ estimates2d <- function(S_x,S_y,USS_x,USS_y,SP_xy,n){
   s2_x <- (USS_x - n*mu_x**2)/(n-1)
   s2_y <- (USS_y - n*mu_y**2)/(n-1)
   rho <- (SP_xy - S_x*S_y/n)/sqrt(s2_x*(n-1))/sqrt(s2_y*(n-1))
-  print(paste("mean x:",mu_x))
-  print(paste("mean y:",mu_y))
-  print(paste("var x:",s2_x))
-  print(paste("var y:",s2_y))
-  print(paste("Cor xy:",rho))
 
-  return(c(mu_x,mu_y,s2_x,s2_y,rho))
+  return(c("mean x" = mu_x,
+           "mean y" = mu_y,
+           "var x"  = s2_x,
+           "var y"  = s2_y,
+           "rho"    = rho))
 }
 
 #' Estimer 2D normal fordeling
@@ -74,13 +73,12 @@ estimates2dSSD <- function(S_x,S_y,SSD_x,SSD_y,SPD_xy,n){
   s2_x <- SSD_x/(n-1)
   s2_y <- SSD_y/(n-1)
   rho <- (SPD_xy)/sqrt(SSD_x)/sqrt(SSD_y)
-  print(paste("mean x:",mu_x))
-  print(paste("mean y:",mu_y))
-  print(paste("var x:",s2_x))
-  print(paste("var y:",s2_y))
-  print(paste("Cor xy:",rho))
 
-  return(c(mu_x,mu_y,s2_x,s2_y,rho))
+  return(c("mean x" = mu_x,
+           "mean y" = mu_y,
+           "var x"  = s2_x,
+           "var y"  = s2_y,
+           "rho"    = rho))
 }
 
 #Konfidensintervaller---------------
@@ -100,7 +98,9 @@ confZ <- function(z,n){
 #' @param n stikprøvestørrelse
 confRho <- function(r,n){
   #Side 34
-  invFisherZ(confZ(fisherZ(r),n))
+  res <- invFisherZ(confZ(fisherZ(r),n))
+  names(res) = c("nedre", "estimat", "øvre")
+  res
 }
 
 #' Konfidensinterval for fælles Z
@@ -141,6 +141,8 @@ testLighedZ <- function(z,n){
 #' @param n vektor med stikprøvestørrelser
 testLighedRho <- function(rho,n){
   res <- testLighedZ( fisherZ(rho),n )
+  names(res) = c("estZ","X2","p_obs")
+  res
 }
 
 #' Test korrelation = 0 i en stikprøve
