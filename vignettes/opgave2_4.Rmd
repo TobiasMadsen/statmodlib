@@ -1,0 +1,29 @@
+<!--
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{An R Markdown Vignette with knitr}
+-->
+
+# Opgave 2.4
+
+### Spm 3)
+For at finde estimaterne i den 2 dimensionale normalfordeling bruger vi funktionen `estimates2d` se manualen for at se hvilke argumenter den tager
+
+```{r}
+(par_m <- estimates2d(14472,5792,2621640,422764,1048988,80))
+(par_k <- estimates2d(5634,1973,935132,115897,328018,34))
+```
+
+### Spm 4)
+Vi finder konfidensintervallet for rho
+
+```{r}
+confRho(par_m[5],80)
+confRho(par_k[5],34)
+```
+
+### Spm 5)
+Endelig ser vi om vi kan teste de to korrelationer ens
+
+```{r}
+testLighedRho( c(par_m[5],par_k[5]),c(80,34))
+```
