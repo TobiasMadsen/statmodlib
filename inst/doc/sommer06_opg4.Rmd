@@ -1,0 +1,46 @@
+<!--
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{An R Markdown Vignette with knitr}
+-->
+
+#Sommer 06 opg
+
+```{r}
+library(statmodlib)
+```
+
+
+#Spm 3)
+
+Estimater
+
+```{r}
+(par <- estimates2d(-3.65,-3.58,3.4441,11.0872,1.6732,6))
+```
+
+#Spm 4)
+Test $\rho=0$
+
+```{r}
+testRhoNul(par[5],6)
+```
+
+#Spm 5)
+
+
+
+```{r}
+S <- matrix(c(par[3],par[5]*sqrt(par[3]*par[4]),par[5]*sqrt(par[3]*par[4]), par[4]),2,2)
+hotellingsT(0,0,par[1],par[2],S,6)
+```
+
+
+Test middelvaerdier 0 enkeltvis med t-test
+
+```{r}
+(u <- unname(par[1]/sqrt(par[3]/6)))
+(p_obs  <- 2*(1-pt(abs(u),5)))
+
+(u <- unname(par[2]/sqrt(par[4]/6)))
+(p_obs  <- 2*(1-pt(abs(u),5)))
+```

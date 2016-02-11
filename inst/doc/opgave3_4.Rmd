@@ -3,7 +3,11 @@
 %\VignetteIndexEntry{An R Markdown Vignette with knitr}
 -->
 
-# Opgave 2.4
+```{r}
+library(statmodlib)
+```
+
+# Opgave 3.4
 
 ### Spm 3)
 For at finde estimaterne i den 2 dimensionale normalfordeling bruger vi funktionen `estimates2d` se manualen for at se hvilke argumenter den tager

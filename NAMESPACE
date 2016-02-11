@@ -1,1 +1,3 @@
 exportPattern("^[[:alpha:]]+")
+export(estimates2d)
+export(estimates2dSSD)
